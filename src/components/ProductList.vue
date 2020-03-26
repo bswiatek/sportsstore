@@ -7,23 +7,29 @@
                     {{ p.price | currency }}
                 </span>
             </h4>
-            <div class="card-text bg-white p-1">{{ p.description }}</div>
+            <div class="card-text bg-white p-1">
+                {{ p.description }}
+                <button v-on:click="handleProductAdd(p)" class="btn btn-success btn-sm float-right">Dodaj do koszyka</button>
+            </div>
         </div>
         <page-controls />
     </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import PageControls from "./PageControls";
 export default {
     components: { PageControls },
     computed: {
         ...mapGetters({ products: "processedProducts" })
     },
-    filters: {
-        currency(value) {
-            return new Intl.NumberFormat("pl-PL", {style: "currency", currency: "PLN"}).format(value);
+    methods: {
+        ...mapMutations({ addProduct: "cart/addProduct" }),
+        handleProductAdd(product) {
+            console.log('in');
+            this.addProduct(product);
+            this.$router.push("/cart");
         }
     }
 }
