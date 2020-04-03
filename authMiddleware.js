@@ -15,7 +15,7 @@ module.exports = function (req, res, next) {
         return;
     } else if (((req.url.startsWith("/api/products") || req.url.startsWith("/products") 
     || req.url.startsWith("/api/categories") || req.url.startsWith("/categories")) && req.method != "GET")
-    || req.url.startsWith("/api/orders") || req.url.startsWith("/orders") && req.methond != "POST"){
+    || (req.url.startsWith("/api/orders") || req.url.startsWith("/orders")) && req.methond != "POST"){
         let token = req.headers["authorization"];
         if (token != null && token.startsWith("Bearer<")) {
             token = token.substring(7, token.length -1);

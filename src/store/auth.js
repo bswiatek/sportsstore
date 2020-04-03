@@ -9,7 +9,7 @@ export default {
         authenticatedAxios(state) {
             return Axios.create({
                 headers: {
-                    "Authorization": `Bearer<${state.jwt}`
+                    "Authorization": `Bearer<${state.jwt}>`
                 }
             });
         }
